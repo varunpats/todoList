@@ -1,6 +1,6 @@
 const submit = document.getElementById("submit");
 submit.addEventListener("click", addEntry);
-localStorage.clear();
+// localStorage.clear();
 document.addEventListener('DOMContentLoaded', addData);
 
 const today = new Date();
