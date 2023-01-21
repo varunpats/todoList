@@ -1,0 +1,58 @@
+body {
+    margin: 0;
+    font-family: Inter;
+    padding: 30px;
+}
+
+h1 {
+    text-align: center;
+}
+
+input,
+select {
+    border: 1px solid #000;
+    padding: 10px;
+    margin-right: 5px;
+}
+
+#submit {
+    border: none;
+    background-color: #000;
+    color: #fff;
+    border: 2px solid #000;
+    padding: 10px 40px;
+    cursor: pointer;
+}
+
+#toDay,
+#future {
+    display: flex;
+    justify-content: space-between;
+    width: 96%;
+    background-color: #000;
+    color: #fff;
+    border-radius: 10px;
+    border: 2px solid #000;
+    padding: 15px;
+    margin: 0 15px 10px;
+}
+
+img {
+    height: 15px;
+}
+
+#done {
+    margin-right: 10px;
+}
+
+#completed {
+    display: flex;
+    justify-content: space-between;
+    width: 96%;
+    background-color: #fff;
+    color: #000;
+    border: 2px solid #000;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 0 15px 10px;
+}
