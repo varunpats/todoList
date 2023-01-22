@@ -1,6 +1,6 @@
 const submit = document.getElementById("submit");
 submit.addEventListener("click", addEntry);
-// localStorage.clear();
+localStorage.clear();
 document.addEventListener('DOMContentLoaded', addData);
 
 const today = new Date();
@@ -17,6 +17,7 @@ if (nm < 10) nm = '0' + nm;
 const formattedToday = dd + '/' + mm + '/' + yyyy;
 const formattedFuture = dd + '/' + nm + '/' + yyyy;
 const formattedPast = yd + '/' + mm + '/' + yyyy;
+let uid = 1;
 
 function addData() {
     let existingEntries = JSON.parse(localStorage.getItem("allEntries"));
@@ -25,38 +26,50 @@ function addData() {
         "task": "AccioJob Assignment",
         "date": formattedToday,
         "priority": "High",
-        "completed": false
+        "completed": false,
+        "uid": uid
     };
+    uid++;
     let entry1 = {
         "task": "AccioJob Assignment 2",
         "date": formattedToday,
         "priority": "Medium",
-        "completed": false
+        "completed": false,
+        "uid": uid
     };
+    uid++;
     let entry2 = {
         "task": "AccioJob Assignment 3",
         "date": formattedFuture,
         "priority": "High",
-        "completed": false
+        "completed": false,
+        "uid": uid
     };
+    uid++;
     let entry3 = {
         "task": "AccioJob Assignment 4",
         "date": "11/01/2022",
         "priority": "Medium",
-        "completed": false
+        "completed": false,
+        "uid": uid
     };
+    uid++;
     let entry4 = {
         "task": "AccioJob Assignment 0",
         "date": formattedPast,
         "priority": "High",
-        "completed": true
+        "completed": true,
+        "uid": uid
     };
+    uid++;
     let entry5 = {
         "task": "AccioJob Assignment 1",
         "date": formattedPast,
         "priority": "Low",
-        "completed": true
+        "completed": true,
+        "uid": uid
     };
+    uid++;
 
     localStorage.setItem("entry", JSON.stringify(entry));
     existingEntries.push(entry);
@@ -91,8 +104,8 @@ function displayData() {
                 Priority : ${ele.priority}
             </span>
             <span>
-                <img src="./check.png" id="todoDone${i}">
-                <img src="./delete.png" id="todoDelete${i}">
+                <img src="./check.png" onClick="check(${ele.uid})">
+                <img src="./delete.png" onClick="del(${ele.uid})">
             </span>
             </div>
             `
@@ -109,8 +122,8 @@ function displayData() {
                 Priority : ${ele.priority}
             </span>
             <span>
-                <img src="./check.png" id="futureDone${j}">
-                <img src="./delete.png" id="futureDelete${j}">
+                <img src="./check.png" onClick="check(${ele.uid})">
+                <img src="./delete.png" onClick="del(${ele.uid})">
             </span>
             </div>
             `
@@ -127,8 +140,8 @@ function displayData() {
                 Priority : ${ele.priority}
             </span>
             <span>
-                <img src="./check.png" onclick="dem(event)" id="futureDone${j}">
-                <img src="./delete.png" id="futureDelete${j}">
+                <img src="./check.png" onClick="check(${ele.uid})">
+                <img src="./delete.png" onClick="del(${ele.uid})">
             </span>
             </div>
             `
@@ -145,7 +158,7 @@ function displayData() {
                 Priority : ${ele.priority}
             </span>
             <span>
-                <img src="./delete-black.png" id="completedDelete${k}">
+                <img src="./delete-black.png" onClick="del(${ele.uid})">
             </span>
             </div>
             `
@@ -168,14 +181,28 @@ function addEntry() {
         "task": task,
         "date": d2,
         "priority": priority,
-        "completed": false
+        "completed": false,
+        "uid": uid
     };
+    uid++;
     existingEntries.push(entry);
     localStorage.setItem("allEntries", JSON.stringify(existingEntries));
     displayData();
 }
 
-// function dem(e) {
-//     console.log(JSON.parse(localStorage.getItem("allEntries")));
-//     console.log(e);
-// }
+function check(id) {
+    let data = JSON.parse(localStorage.getItem("allEntries"))
+    data.forEach(ele => {
+        if (ele.uid == id)
+            ele.completed = true
+    })
+    localStorage.setItem("allEntries", JSON.stringify(data));
+    displayData()
+}
+
+function del(id) {
+    let data = JSON.parse(localStorage.getItem("allEntries"))
+    data.splice((data.map(item => item.uid).indexOf(id)), 1);
+    localStorage.setItem("allEntries", JSON.stringify(data));
+    displayData()
+}
