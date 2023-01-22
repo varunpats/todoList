@@ -1,7 +1,6 @@
 const submit = document.getElementById("submit");
 submit.addEventListener("click", addEntry);
-localStorage.clear();
-document.addEventListener('DOMContentLoaded', addData);
+document.addEventListener('DOMContentLoaded', displayData);
 
 const today = new Date();
 const yyyy = today.getFullYear();
@@ -18,69 +17,6 @@ const formattedToday = dd + '/' + mm + '/' + yyyy;
 const formattedFuture = dd + '/' + nm + '/' + yyyy;
 const formattedPast = yd + '/' + mm + '/' + yyyy;
 let uid = 1;
-
-function addData() {
-    let existingEntries = JSON.parse(localStorage.getItem("allEntries"));
-    if (existingEntries == null) existingEntries = [];
-    let entry = {
-        "task": "AccioJob Assignment",
-        "date": formattedToday,
-        "priority": "High",
-        "completed": false,
-        "uid": uid
-    };
-    uid++;
-    let entry1 = {
-        "task": "AccioJob Assignment 2",
-        "date": formattedToday,
-        "priority": "Medium",
-        "completed": false,
-        "uid": uid
-    };
-    uid++;
-    let entry2 = {
-        "task": "AccioJob Assignment 3",
-        "date": formattedFuture,
-        "priority": "High",
-        "completed": false,
-        "uid": uid
-    };
-    uid++;
-    let entry3 = {
-        "task": "AccioJob Assignment 4",
-        "date": "11/01/2022",
-        "priority": "Medium",
-        "completed": false,
-        "uid": uid
-    };
-    uid++;
-    let entry4 = {
-        "task": "AccioJob Assignment 0",
-        "date": formattedPast,
-        "priority": "High",
-        "completed": true,
-        "uid": uid
-    };
-    uid++;
-    let entry5 = {
-        "task": "AccioJob Assignment 1",
-        "date": formattedPast,
-        "priority": "Low",
-        "completed": true,
-        "uid": uid
-    };
-    uid++;
-
-    localStorage.setItem("entry", JSON.stringify(entry));
-    existingEntries.push(entry);
-    existingEntries.push(entry1);
-    existingEntries.push(entry2);
-    existingEntries.push(entry3);
-    existingEntries.push(entry4);
-    existingEntries.push(entry5);
-    localStorage.setItem("allEntries", JSON.stringify(existingEntries));
-    displayData()
-}
 
 function displayData() {
     let todayTodo = document.getElementById("toDayDiv");
